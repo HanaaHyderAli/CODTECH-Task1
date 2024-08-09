@@ -1,0 +1,30 @@
+import time
+from selenium.webdriver.support.select import Select
+from selenium import webdriver
+from selenium.webdriver.common.by import By
+
+options = webdriver.ChromeOptions()
+options.add_experimental_option('detach',True)
+driver = webdriver.Chrome(options=options)
+driver.get("https://www.facebook.com/")
+driver.implicitly_wait(10)
+print(driver.title)
+driver.maximize_window()
+
+driver.find_element(By.XPATH,"(//a[normalize-space()='Create new account'])[1]").click()
+
+
+driver.find_element(By.NAME,"firstname").send_keys("HANAA")
+driver.find_element(By.NAME,"lastname").send_keys("HYDER")
+driver.find_element(By.NAME,"reg_email__").send_keys("sample@gmail.com")
+time.sleep(2)
+driver.find_element(By.NAME,"reg_email_confirmation__").send_keys("sample@gmail.com")
+driver.find_element(By.NAME,"reg_passwd__").send_keys("sample")
+month=Select(driver.find_element(By.NAME,"birthday_month"))
+month.select_by_visible_text("Feb")
+day=Select(driver.find_element(By.NAME,"birthday_day"))
+day.select_by_visible_text("10")
+year=Select(driver.find_element(By.NAME,"birthday_year"))
+year.select_by_visible_text("1996")
+driver.find_element(By.XPATH,"//label[normalize-space()='Female']").click()
+driver.find_element(By.NAME,"websubmit").click()
